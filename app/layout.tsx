@@ -12,6 +12,21 @@ export const fontSans = FontSans({
 
 export const metadata: Metadata = {
   title: "Gist Lab - Code runner",
+  description: "The online code runner sandbox for your Github Gists",
+  icons: {
+    icon: [
+      {
+        media: "(prefers-color-scheme: light)",
+        url: "/logo.svg",
+        href: "/logo.svg",
+      },
+      {
+        media: "(prefers-color-scheme: dark)",
+        url: "/logo-dark.svg",
+        href: "/logo-dark.svg",
+      },
+    ],
+  },
 }
 
 export default function RootLayout({
