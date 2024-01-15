@@ -5,14 +5,14 @@ import { Inter as FontSans } from "next/font/google"
 import { cn } from "@/lib/utils"
 import { ClerkProvider } from "@clerk/nextjs"
 
-export const fontSans = FontSans({
+const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 })
 
 export const metadata: Metadata = {
   title: "Gist Lab - Code runner",
-  description: "The online code runner sandbox for your Github Gists",
+  description: "The online code runner sandbox for your Github gists",
   icons: {
     icon: [
       {
