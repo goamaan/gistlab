@@ -10,11 +10,11 @@ export const Heading = () => {
   const HeadingContent = (
     <>
       <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold">
-        Run Github Gists online. Welcome to{" "}
+        Run Code Gists online. Welcome to{" "}
         <span className="underline">GistLab</span>
       </h1>
       <h3 className="text-base sm:text-xl md:text-2xl font-medium">
-        GistLab is an online code runner for Github gists, including a code
+        GistLab is an online code runner for your code gists, including a code
         editing environment.
       </h3>
     </>

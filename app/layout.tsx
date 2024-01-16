@@ -14,7 +14,7 @@ const fontSans = FontSans({
 })
 
 export const metadata: Metadata = {
-  title: "Gist Lab - Code runner",
+  title: "GistLab | Code runner",
   description: "The online code runner sandbox for your Github gists",
   icons: {
     icon: [
