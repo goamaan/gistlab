@@ -10,10 +10,21 @@ const font = Poppins({
 
 export const Logo = () => {
   return (
-    <div className="flex flex-col items-center gap-y-4">
-      <div className="bg-white rounded-full p-1">
-        <Image src="/logo-dark.svg" alt="GistLab" height="80" width="80" />
-      </div>
+    <div className="flex flex-col mt-10 items-center gap-y-4">
+      <Image
+        src="/logo.svg"
+        alt="GistLab"
+        className="dark:hidden p-4"
+        height="64"
+        width="64"
+      />
+      <Image
+        src="/logo-dark.svg"
+        alt="GistLab"
+        className="dark:block"
+        height="64"
+        width="64"
+      />
       <div className={cn("flex flex-col items-center", font.className)}>
         <p className="text-xl font-semibold">GistLab</p>
         <p className="text-sm text-muted-foreground">Run your Gists</p>

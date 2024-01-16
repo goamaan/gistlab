@@ -3,9 +3,10 @@ import "./globals.css"
 import { Inter as FontSans } from "next/font/google"
 import { dark } from "@clerk/themes"
 import { cn } from "@/lib/utils"
-import { ClerkProvider } from "@clerk/nextjs"
+import { ClerkLoaded, ClerkLoading, ClerkProvider } from "@clerk/nextjs"
 import { ThemeProvider } from "@/providers/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
+import { Spinner } from "@/components/spinner"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -53,8 +54,8 @@ export default function RootLayout({
             disableTransitionOnChange
             storageKey="gistlab-theme"
           >
-            <Toaster />
             {children}
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>
