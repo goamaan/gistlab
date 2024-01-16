@@ -1,9 +1,5 @@
-import { UserButton } from "@clerk/nextjs"
+import { currentUser } from "@clerk/nextjs"
 
-export default function MarketingPage() {
-  return (
-    <div>
-      <UserButton afterSignOutUrl="/" />
-    </div>
-  )
+export default async function MarketingPage() {
+  return <div></div>
 }
