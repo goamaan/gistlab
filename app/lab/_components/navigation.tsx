@@ -22,6 +22,8 @@ import {
 } from "@/components/ui/popover"
 import { UserItem } from "@/app/lab/_components/user-item"
 import { Navbar } from "@/app/lab/_components/navbar"
+import { useSettings } from "@/hooks/use-settings"
+import { Item } from "@/app/lab/_components/gist"
 
 // import { useSettings } from "@/hooks/use-settings"
 
@@ -33,8 +35,8 @@ import { Navbar } from "@/app/lab/_components/navbar"
 
 export const Navigation = () => {
   const router = useRouter()
-  //   const settings = useSettings()
-  //   const search = useSearch()
+  const settings = useSettings()
+
   const params = useParams()
   const pathname = usePathname()
   const isMobile = useMediaQuery("(max-width: 768px)")
@@ -152,8 +154,8 @@ export const Navigation = () => {
         <div>
           <UserItem />
           {/* <Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
-          <Item label="Settings" icon={Settings} onClick={settings.onOpen} />
           <Item onClick={handleCreate} label="New page" icon={PlusCircle} /> */}
+          <Item label="Settings" icon={Settings} onClick={settings.onOpen} />
         </div>
         <div className="mt-4">
           {/* <DocumentList /> */}

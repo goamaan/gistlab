@@ -7,6 +7,7 @@ import { ClerkLoaded, ClerkLoading, ClerkProvider } from "@clerk/nextjs"
 import { ThemeProvider } from "@/providers/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
 import { Spinner } from "@/components/spinner"
+import { ModalProvider } from "@/providers/modal-provider"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -56,6 +57,7 @@ export default function RootLayout({
           >
             {children}
             <Toaster />
+            <ModalProvider />
           </ThemeProvider>
         </body>
       </html>
