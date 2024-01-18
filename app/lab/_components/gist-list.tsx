@@ -1,18 +1,18 @@
-"use client";
+"use client"
 
-import { useParams, useRouter } from "next/navigation";
-import { FileIcon } from "lucide-react";
+import { useParams, useRouter } from "next/navigation"
+import { FileIcon } from "lucide-react"
 
-import { Item } from "./item";
-import { Gist } from "@prisma/client";
+import { Item } from "./item"
+import { Gist } from "@prisma/client"
 
 interface GistListProps {
-    gists: Gist[];
+    gists: Gist[]
 }
 
-export const DocumentList = ({ gists }: GistListProps) => {
-    const params = useParams();
-    const router = useRouter();
+export const GistList = ({ gists }: GistListProps) => {
+    const params = useParams()
+    const router = useRouter()
 
     return (
         <>
@@ -29,5 +29,5 @@ export const DocumentList = ({ gists }: GistListProps) => {
                 </div>
             ))}
         </>
-    );
-};
+    )
+}

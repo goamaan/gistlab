@@ -52,7 +52,7 @@ export const languageMap: { [key: string]: number } = {
     "TypeScript (3.7.4)": 74,
     "TypeScript (5.0.3)": 94,
     "Visual Basic.Net (vbnc 0.0.0.5943)": 84,
-};
+}
 
 export const languageIdAliasMap: { [key: number]: string } = {
     45: "assembly",
@@ -108,4 +108,60 @@ export const languageIdAliasMap: { [key: number]: string } = {
     74: "typescript", // You may choose a specific version if you prefer
     94: "typescript", // You may choose a specific version if you prefer
     84: "visual basic.net",
-};
+}
+
+export const languageIdExtensionMap: { [key: number]: string } = {
+    45: "asm",
+    46: "sh",
+    47: "bas",
+    75: "c", // You may choose a specific version if you prefer
+    76: "cpp", // You may choose a specific version if you prefer
+    48: "c", // You may choose a specific version if you prefer
+    52: "cpp", // You may choose a specific version if you prefer
+    49: "c", // You may choose a specific version if you prefer
+    53: "cpp", // You may choose a specific version if you prefer
+    50: "c", // You may choose a specific version if you prefer
+    54: "cpp", // You may choose a specific version if you prefer
+    86: "clj",
+    51: "cs",
+    77: "cob",
+    55: "lisp",
+    90: "dart",
+    56: "d",
+    57: "ex",
+    58: "erl",
+    44: "", // Executable may not have a specific extension
+    87: "fs",
+    59: "f",
+    60: "go", // You may choose a specific version if you prefer
+    95: "go", // You may choose a specific version if you prefer
+    88: "groovy",
+    61: "hs",
+    91: "java", // You may choose a specific version if you prefer
+    62: "java", // You may choose a specific version if you prefer
+    63: "js", // You may choose a specific version if you prefer
+    93: "js", // You may choose a specific version if you prefer
+    78: "kt",
+    64: "lua",
+    89: "", // Multi-file program may not have a specific extension
+    79: "m", // Objective-C may commonly use .m extension
+    65: "ml",
+    66: "m",
+    67: "pas",
+    85: "pl",
+    68: "php",
+    43: "", // Plain Text may not have a specific extension
+    69: "pro",
+    70: "py", // You may choose a specific version if you prefer
+    92: "py", // You may choose a specific version if you prefer
+    71: "py", // You may choose a specific version if you prefer
+    80: "r",
+    72: "rb",
+    73: "rs",
+    81: "scala",
+    82: "sql",
+    83: "swift",
+    74: "ts", // You may choose a specific version if you prefer
+    94: "ts", // You may choose a specific version if you prefer
+    84: "vb",
+}

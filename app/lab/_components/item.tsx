@@ -29,7 +29,7 @@ interface GistProps {
     label: string;
     onClick?: () => void;
     icon: LucideIcon;
-    updatedAt: Date;
+    updatedAt?: Date;
 }
 
 export const Item = ({
@@ -78,7 +78,7 @@ export const Item = ({
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <div className="text-xs text-muted-foreground p-2">
-                                Last edited: {updatedAt.toLocaleTimeString()}
+                                Last edited: {updatedAt?.toLocaleTimeString()}
                             </div>
                         </DropdownMenuContent>
                     </DropdownMenu>

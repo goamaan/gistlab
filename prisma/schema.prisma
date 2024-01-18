@@ -33,8 +33,41 @@ model Gist {
   user   User?   @relation(fields: [userId], references: [id])
   userId String?
 
+  submissions CodeSubmission[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([userId])
+}
+
+model CodeSubmission {
+  id                 String  @id @default(uuid())
+  source_code        String
+  language_id        Int
+  language_name      String?
+  stdin              String?
+  stderr             String?
+  expected_output    String?
+  stdout             String?
+  exit_code          String?
+  exit_signal        String?
+  message            String?
+  compiler_options   String?
+  compile_output     String?
+  callback_url       String?
+  additional_files   String?
+  status_id          Int?
+  status_description String?
+  created_at         String?
+  finished_at        String?
+  time               String?
+  memory             String?
+  token              String?
+  number_of_runs     Int?
+
+  gist   Gist?   @relation(fields: [gistId], references: [id])
+  gistId String?
+
+  @@index([gistId])
 }

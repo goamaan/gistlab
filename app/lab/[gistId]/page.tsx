@@ -1,12 +1,13 @@
-import { GistEditor } from "@/app/lab/[gistId]/editor";
-import { Spinner } from "@/components/spinner";
-import { db } from "@/lib/db";
-import { Suspense } from "react";
+import { GistEditor } from "@/app/lab/[gistId]/_components/editor"
+import { Spinner } from "@/components/spinner"
+import { languageIdExtensionMap } from "@/lib/coding_languages"
+import { db } from "@/lib/db"
+import { Suspense } from "react"
 
 interface GistIdPageProps {
     params: {
-        gistId: string;
-    };
+        gistId: string
+    }
 }
 
 const GistIdPage = async ({ params }: GistIdPageProps) => {
@@ -14,10 +15,10 @@ const GistIdPage = async ({ params }: GistIdPageProps) => {
         where: {
             id: params.gistId,
         },
-    });
+    })
 
     if (!gist) {
-        throw new Error("Gist not found");
+        throw new Error("Gist not found")
     }
 
     return (
@@ -28,9 +29,9 @@ const GistIdPage = async ({ params }: GistIdPageProps) => {
                 </div>
             }
         >
-            <GistEditor gist={gist} />;
+            <GistEditor gist={gist} />
         </Suspense>
-    );
-};
+    )
+}
 
-export default GistIdPage;
+export default GistIdPage
