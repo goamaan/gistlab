@@ -80,13 +80,15 @@ export const updateGistContent = async ({
 export const runGist = async ({
     language_id,
     source_code,
+    gistId,
 }: {
     language_id: number
     source_code: string
+    gistId: string
 }) => {
     const host = process.env.JUDGE0_HOST
     const key = process.env.JUDGE0_KEY
-    source_code = Buffer.from(source_code).toString("base64")
+    const encoded_source_code = Buffer.from(source_code).toString("base64")
 
     if (!host || !key) {
         throw new Error("Judge0 host and/or key is not set in env vars")
@@ -109,9 +111,15 @@ export const runGist = async ({
         },
         body: JSON.stringify({
             language_id,
-            source_code,
+            source_code: encoded_source_code,
         }),
     }
 
-    await fetch(url, options)
+    const res = await fetch(url, options)
+
+    const { token } = await res.json()
+
+    await db.codeSubmission.create({
+        data: { source_code, language_id, gistId, token },
+    })
 }

@@ -1,4 +1,5 @@
 import { db } from "@/lib/db"
+import { base64ToString } from "@/lib/utils"
 
 export async function PUT(req: Request) {
     const submission = await req.json()
@@ -28,13 +29,12 @@ export async function PUT(req: Request) {
         language,
     } = submission
 
-    await db.codeSubmission.create({
+    await db.codeSubmission.updateMany({
+        where: { token },
         data: {
-            language_id,
-            source_code,
             additional_files,
             callback_url,
-            compile_output,
+            compile_output: base64ToString(compile_output),
             compiler_options,
             created_at,
             exit_code,
@@ -43,14 +43,14 @@ export async function PUT(req: Request) {
             finished_at,
             language_name: language.name,
             status_description: status.description,
-            memory,
+            memory: parseFloat(memory),
             message,
             number_of_runs,
             status_id,
-            stderr,
-            stdin,
-            stdout,
-            time,
+            stderr: base64ToString(stderr),
+            stdin: base64ToString(stdin),
+            stdout: base64ToString(stdout),
+            time: parseFloat(time),
             token,
         },
     })

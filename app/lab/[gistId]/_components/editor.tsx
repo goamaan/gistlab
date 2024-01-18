@@ -9,6 +9,7 @@ import { useAuth } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Gist } from "@prisma/client"
 import dynamic from "next/dynamic"
+import Link from "next/link"
 import { useMemo, useState, useTransition } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
@@ -63,6 +64,7 @@ export const GistEditor = ({ gist }: { gist: Gist }) => {
             const promise = runGist({
                 language_id: gist.languageId,
                 source_code: code,
+                gistId: gist.id,
             })
 
             toast.promise(promise, {
@@ -98,6 +100,11 @@ export const GistEditor = ({ gist }: { gist: Gist }) => {
                         languageIdExtensionMap[gist.languageId]
                     }`}</h1>
                     <div className="flex items-center gap-x-2">
+                        <Link href={`/lab/${gist.id}/submissions`}>
+                            <Button variant={"secondary"}>
+                                View submissions
+                            </Button>
+                        </Link>
                         <form onSubmit={saveCodeForm.handleSubmit(onSaveCode)}>
                             <SubmitButton
                                 variant={"ghost"}

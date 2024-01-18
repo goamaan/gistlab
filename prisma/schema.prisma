@@ -50,8 +50,8 @@ model CodeSubmission {
   stderr             String?
   expected_output    String?
   stdout             String?
-  exit_code          String?
-  exit_signal        String?
+  exit_code          Int?
+  exit_signal        Int?
   message            String?
   compiler_options   String?
   compile_output     String?
@@ -61,13 +61,16 @@ model CodeSubmission {
   status_description String?
   created_at         String?
   finished_at        String?
-  time               String?
-  memory             String?
+  time               Float?
+  memory             Float?
   token              String?
   number_of_runs     Int?
 
   gist   Gist?   @relation(fields: [gistId], references: [id])
   gistId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([gistId])
 }
