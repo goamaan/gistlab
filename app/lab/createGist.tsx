@@ -30,6 +30,7 @@ import { useTransition } from "react";
 import { createGist } from "@/actions/gist/create";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useAuth } from "@clerk/nextjs";
 
 const formSchema = z.object({
     languageId: z.string({ required_error: "Language selection is required" }),
@@ -44,6 +45,7 @@ const formSchema = z.object({
 export function CreateGistForm() {
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
+    const { userId } = useAuth();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -54,9 +56,10 @@ export function CreateGistForm() {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         startTransition(() => {
-            const promise = createGist({ ...values }).then((gist) =>
-                router.push(`/lab/${gist.id}`)
-            );
+            const promise = createGist({
+                ...values,
+                userId: userId || null,
+            }).then((gist) => router.push(`/lab/${gist.id}`));
 
             toast.promise(promise, {
                 loading: "Creating a new gist...",

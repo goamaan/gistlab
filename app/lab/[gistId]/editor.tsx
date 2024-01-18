@@ -17,8 +17,9 @@ export const GistEditor = ({ gist }: { gist: Gist }) => {
             <div className="h-full w-full mx-auto">
                 {/* <Toolbar initialData={document} /> */}
                 <Editor
+                    languageId={gist.languageId}
                     onChange={onChange}
-                    initialContent={`console.log("yo")`}
+                    initialContent={gist.content}
                 />
             </div>
         </div>

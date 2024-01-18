@@ -24,7 +24,9 @@ import {
 import { UserItem } from "@/app/lab/_components/user-item";
 import { Navbar } from "@/app/lab/_components/navbar";
 import { useSettings } from "@/hooks/use-settings";
-import { Item } from "@/app/lab/_components/gist";
+import { Item } from "@/app/lab/_components/item";
+import { DocumentList } from "@/app/lab/_components/document-list";
+import { Gist } from "@prisma/client";
 
 // import { useSettings } from "@/hooks/use-settings"
 
@@ -34,7 +36,7 @@ import { Item } from "@/app/lab/_components/gist";
 // import { TrashBox } from "./trash-box"
 // import { Navbar } from "./navbar"
 
-export const Navigation = () => {
+export const Navigation = ({ gists }: { gists: Gist[] }) => {
     const router = useRouter();
     const settings = useSettings();
 
@@ -143,7 +145,7 @@ export const Navigation = () => {
             <aside
                 ref={sidebarRef}
                 className={cn(
-                    "group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col",
+                    "group/sidebar h-full bg-secondary/5 overflow-y-auto relative flex w-60 flex-col",
                     isResetting && "transition-all ease-in-out duration-300",
                     isMobile && "w-0"
                 )}
@@ -174,19 +176,8 @@ export const Navigation = () => {
                     />
                 </div>
                 <div className="mt-4">
-                    {/* <DocumentList /> */}
+                    <DocumentList gists={gists} />
                     {/* <Item onClick={handleCreate} icon={Plus} label="Add a page" /> */}
-                    {/* <Popover>
-            <PopoverTrigger className="w-full mt-4">
-              <Item label="Trash" icon={Trash} />
-            </PopoverTrigger>
-            <PopoverContent
-              className="p-0 w-72"
-              side={isMobile ? "bottom" : "right"}
-            >
-              <TrashBox />
-            </PopoverContent>
-          </Popover> */}
                 </div>
                 <div
                     onMouseDown={handleMouseDown}

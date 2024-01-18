@@ -53,3 +53,59 @@ export const languageMap: { [key: string]: number } = {
     "TypeScript (5.0.3)": 94,
     "Visual Basic.Net (vbnc 0.0.0.5943)": 84,
 };
+
+export const languageIdAliasMap: { [key: number]: string } = {
+    45: "assembly",
+    46: "bash",
+    47: "basic",
+    75: "c", // You may choose a specific version if you prefer
+    76: "c++", // You may choose a specific version if you prefer
+    48: "c", // You may choose a specific version if you prefer
+    52: "c++", // You may choose a specific version if you prefer
+    49: "c", // You may choose a specific version if you prefer
+    53: "c++", // You may choose a specific version if you prefer
+    50: "c", // You may choose a specific version if you prefer
+    54: "c++", // You may choose a specific version if you prefer
+    86: "clojure",
+    51: "c#",
+    77: "cobol",
+    55: "common lisp",
+    90: "dart",
+    56: "d",
+    57: "elixir",
+    58: "erlang",
+    44: "executable",
+    87: "f#",
+    59: "fortran",
+    60: "go", // You may choose a specific version if you prefer
+    95: "go", // You may choose a specific version if you prefer
+    88: "groovy",
+    61: "haskell",
+    91: "java", // You may choose a specific version if you prefer
+    62: "java", // You may choose a specific version if you prefer
+    63: "javascript", // You may choose a specific version if you prefer
+    93: "javascript", // You may choose a specific version if you prefer
+    78: "kotlin",
+    64: "lua",
+    89: "multi-file program",
+    79: "objective-c",
+    65: "ocaml",
+    66: "octave",
+    67: "pascal",
+    85: "perl",
+    68: "php",
+    43: "plain text",
+    69: "prolog",
+    70: "python", // You may choose a specific version if you prefer
+    92: "python", // You may choose a specific version if you prefer
+    71: "python", // You may choose a specific version if you prefer
+    80: "r",
+    72: "ruby",
+    73: "rust",
+    81: "scala",
+    82: "sql",
+    83: "swift",
+    74: "typescript", // You may choose a specific version if you prefer
+    94: "typescript", // You may choose a specific version if you prefer
+    84: "visual basic.net",
+};
