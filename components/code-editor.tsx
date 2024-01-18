@@ -3,7 +3,6 @@
 import { useTheme } from "next-themes"
 import Editor, { useMonaco } from "@monaco-editor/react"
 import { languageIdAliasMap } from "@/lib/coding_languages"
-import themeData from "./editor-themes/blackboard.json"
 
 interface EditorProps {
     onChange: (value?: string) => void
