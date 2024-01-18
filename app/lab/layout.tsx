@@ -23,7 +23,7 @@ const MainLayout = async ({ children }: { children: React.ReactNode }) => {
     })
 
     return (
-        <div className="h-full flex items-end dark:bg-[#1F1F1F]">
+        <div className="h-full flex items-end">
             <Navigation gists={gists} />
             <main className="flex-1 h-full overflow-y-auto">{children}</main>
         </div>

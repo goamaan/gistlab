@@ -40,15 +40,14 @@ export default async function GistSubmissions({
                         </div>
                     </CardHeader>
                     <CardContent className="relative bg-black text-white p-4 rounded">
-                        <pre className="overflow-x-auto max-h-[100px] scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-800">
+                        <pre className="overflow-x-auto max-h-[100px] min-h-[80px] scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-800">
                             <code>{s.source_code.substring(0, 50)}</code>
                         </pre>
                         <div className="absolute inset-0 bg-black bg-opacity-90 group-hover:opacity-0 transition-opacity">
                             <div className="p-4 space-y-2">
-                                <div className="text-sm">{`Stdout: ${s.stdout}`}</div>
-                                <div className="text-sm">{`Stdin: ${s.stdin}`}</div>
-                                <div className="text-sm">{`Stderr: ${s.stderr}`}</div>
-                                <div className="text-sm">{`Compile output: ${s.compile_output}`}</div>
+                                <div className="font-semibold font-mono">{`Stdout: ${s.stdout}`}</div>
+                                <div className="font-semibold font-mono">{`Stderr: ${s.stderr}`}</div>
+                                <div className="font-semibold font-mono">{`Compile output: ${s.compile_output}`}</div>
                             </div>
                         </div>
                     </CardContent>

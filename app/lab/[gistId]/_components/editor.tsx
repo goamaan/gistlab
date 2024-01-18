@@ -93,7 +93,7 @@ export const GistEditor = ({ gist }: { gist: Gist }) => {
     }
 
     return (
-        <div className="flex gap-2 flex-col h-full w-full">
+        <div className="flex flex-col h-full w-full">
             <nav className="pl-14 bg-primary/5 dark:bg-secondary/40 px-3 py-2 w-full flex items-center gap-x-4">
                 <div className="flex items-center justify-between w-full">
                     <h1>{`${gist.filename}.${
