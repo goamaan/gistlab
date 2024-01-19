@@ -10,57 +10,57 @@ import { Spinner } from "@/components/spinner"
 import { ModalProvider } from "@/providers/modal-provider"
 
 const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
+    subsets: ["latin"],
+    variable: "--font-sans",
 })
 
 export const metadata: Metadata = {
-  title: "GistLab | Code runner",
-  description: "The online code runner sandbox for your Github gists",
-  icons: {
-    icon: [
-      {
-        media: "(prefers-color-scheme: light)",
-        url: "/logo.svg",
-        href: "/logo.svg",
-      },
-      {
-        media: "(prefers-color-scheme: dark)",
-        url: "/logo-dark.svg",
-        href: "/logo-dark.svg",
-      },
-    ],
-  },
+    title: "GistLab | Code runner",
+    description: "The online code runner sandbox for your Github gists",
+    icons: {
+        icon: [
+            {
+                media: "(prefers-color-scheme: light)",
+                url: "/logo.svg",
+                href: "/logo.svg",
+            },
+            {
+                media: "(prefers-color-scheme: dark)",
+                url: "/logo-dark.svg",
+                href: "/logo-dark.svg",
+            },
+        ],
+    },
 }
 
 export default function RootLayout({
-  children,
+    children,
 }: {
-  children: React.ReactNode
+    children: React.ReactNode
 }) {
-  return (
-    <ClerkProvider appearance={{ baseTheme: dark }}>
-      <html lang="en" suppressHydrationWarning>
-        <head />
-        <body
-          className={cn(
-            "min-h-screen bg-background font-sans antialiased",
-            fontSans.variable
-          )}
-        >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-            storageKey="gistlab-theme"
-          >
-            {children}
-            <Toaster />
-            <ModalProvider />
-          </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
-  )
+    return (
+        <ClerkProvider appearance={{ baseTheme: dark }}>
+            <html lang="en" suppressHydrationWarning>
+                <head />
+                <body
+                    className={cn(
+                        "min-h-screen bg-background font-sans antialiased",
+                        fontSans.variable
+                    )}
+                >
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="system"
+                        enableSystem
+                        disableTransitionOnChange
+                        storageKey="gistlab-theme"
+                    >
+                        {children}
+                        <Toaster closeButton={true} richColors={true} />
+                        <ModalProvider />
+                    </ThemeProvider>
+                </body>
+            </html>
+        </ClerkProvider>
+    )
 }
