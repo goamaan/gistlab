@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Clapperboard } from "lucide-react"
 import { SignInButton, UserButton, auth, currentUser } from "@clerk/nextjs"
-
+import { clerkClient } from "@clerk/nextjs"
 import { Button } from "@/components/ui/button"
 
 export const Actions = async () => {
@@ -18,8 +18,6 @@ export const Actions = async () => {
             </div>
         )
     }
-
-    const user = await currentUser()
 
     return (
         <div className="flex items-center justify-end gap-x-2 ml-4 lg:ml-0">
