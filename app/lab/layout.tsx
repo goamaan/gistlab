@@ -20,6 +20,7 @@ const MainLayout = async ({ children }: { children: React.ReactNode }) => {
 
     const gists = await db.gist.findMany({
         where: { userId: user.id },
+        include: { files: true },
     })
 
     return (

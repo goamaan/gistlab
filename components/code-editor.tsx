@@ -6,17 +6,14 @@ import { languageIdAliasMap } from "@/lib/coding_languages"
 
 interface EditorProps {
     onChange: (value?: string) => void
-    initialContent?: string
-    editable?: boolean
-    languageId: number
+    file: {
+        id: string
+        language: string
+        value: string
+    }
 }
 
-const CodeEditor = ({
-    onChange,
-    initialContent,
-    editable,
-    languageId,
-}: EditorProps) => {
+const CodeEditor = ({ file, onChange }: EditorProps) => {
     const { resolvedTheme } = useTheme()
     const monaco = useMonaco()
     monaco?.editor.defineTheme("blackboard", {
@@ -155,8 +152,9 @@ const CodeEditor = ({
 
     return (
         <Editor
-            defaultLanguage={languageIdAliasMap[languageId]}
-            defaultValue={initialContent}
+            defaultLanguage={file.language}
+            defaultValue={file.value}
+            path={file.id}
             className="h-full w-full"
             theme={resolvedTheme === "dark" ? "blackboard" : "light"}
             onChange={onChange}

@@ -25,20 +25,33 @@ model User {
 
 model Gist {
   id          String @id @default(uuid())
-  filename    String @db.TinyText
   description String @db.Text
-  content     String @db.Text
-  languageId  Int
+  files       File[]
 
-  user   User?   @relation(fields: [userId], references: [id])
-  userId String?
-
-  submissions CodeSubmission[]
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([userId])
+}
+
+model File {
+  id         String @id @default(uuid())
+  filename   String @db.TinyText
+  content    String @db.Text
+  languageId Int
+
+  submissions CodeSubmission[]
+
+  gist   Gist   @relation(fields: [gistId], references: [id])
+  gistId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([gistId])
 }
 
 model CodeSubmission {
@@ -66,11 +79,11 @@ model CodeSubmission {
   token              String?
   number_of_runs     Int?
 
-  gist   Gist?   @relation(fields: [gistId], references: [id])
-  gistId String?
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([gistId])
+  file   File   @relation(fields: [fileId], references: [id])
+  fileId String
+
+  @@index([fileId])
 }

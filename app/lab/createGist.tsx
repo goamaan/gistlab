@@ -31,12 +31,14 @@ import { createGist } from "@/actions/gist"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 import { useAuth } from "@clerk/nextjs"
+import { Button } from "@/components/ui/button"
+import { PlusCircle } from "lucide-react"
 
 const formSchema = z.object({
-    languageId: z.string({ required_error: "Language selection is required" }),
-    filename: z.string().min(2, {
-        message: "Filename excluding extension must be at least 3 characters",
-    }),
+    // languageId: z.string({ required_error: "Language selection is required" }),
+    // filename: z.string().min(2, {
+    //     message: "Filename excluding extension must be at least 3 characters",
+    // }),
     description: z.string().min(5, {
         message: "Description must be at least 5 characters",
     }),
@@ -47,17 +49,17 @@ export function CreateGistForm() {
     const [isPending, startTransition] = useTransition()
     const { userId } = useAuth()
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            languageId: "94",
-        },
-    })
+    // const form = useForm<z.infer<typeof formSchema>>({
+    //     resolver: zodResolver(formSchema),
+    //     defaultValues: {
+    //         // languageId: "94",
+    //     },
+    // })
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    function onSubmit() {
         startTransition(() => {
             const promise = createGist({
-                ...values,
+                description: "Gist Description",
                 userId: userId || null,
             }).then((gist) => router.push(`/lab/${gist.id}`))
 
@@ -70,85 +72,92 @@ export function CreateGistForm() {
     }
 
     return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <FormField
-                    control={form.control}
-                    name="filename"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Filename (without extension)</FormLabel>
-                            <FormControl>
-                                <Input placeholder="binarySearch" {...field} />
-                            </FormControl>
-                            <FormDescription>Name of gist file</FormDescription>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="description"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Gist Description</FormLabel>
-                            <FormControl>
-                                <Textarea
-                                    placeholder="Code snippet to implement Binary search in Typescript"
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormDescription>
-                                A short description of your gist
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="languageId"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Language</FormLabel>
-                            <FormControl>
-                                <Select {...field}>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select a language" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectGroup>
-                                            <SelectLabel>
-                                                Coding Language
-                                            </SelectLabel>
-                                            {Object.entries(languageMap).map(
-                                                ([key, value]) => (
-                                                    <SelectItem
-                                                        key={key}
-                                                        value={value.toString()}
-                                                    >
-                                                        {key}
-                                                    </SelectItem>
-                                                )
-                                            )}
-                                        </SelectGroup>
-                                    </SelectContent>
-                                </Select>
-                            </FormControl>
-                            <FormDescription>
-                                The language that your code is executed as
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <SubmitButton
-                    variant={"default"}
-                    isPending={isPending}
-                    className="self-center mt-4"
-                    label="Create"
-                />
-            </form>
-        </Form>
+        // <Form {...form}>
+        //     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        //         <FormField
+        //             control={form.control}
+        //             name="filename"
+        //             render={({ field }) => (
+        //                 <FormItem>
+        //                     <FormLabel>Filename (without extension)</FormLabel>
+        //                     <FormControl>
+        //                         <Input placeholder="binarySearch" {...field} />
+        //                     </FormControl>
+        //                     <FormDescription>Name of gist file</FormDescription>
+        //                     <FormMessage />
+        //                 </FormItem>
+        //             )}
+        //         />
+        //         <FormField
+        //             control={form.control}
+        //             name="description"
+        //             render={({ field }) => (
+        //                 <FormItem>
+        //                     <FormLabel>Gist Description</FormLabel>
+        //                     <FormControl>
+        //                         <Textarea
+        //                             placeholder="Code snippet to implement Binary search in Typescript"
+        //                             {...field}
+        //                         />
+        //                     </FormControl>
+        //                     <FormDescription>
+        //                         A short description of your gist
+        //                     </FormDescription>
+        //                     <FormMessage />
+        //                 </FormItem>
+        //             )}
+        //         />
+        //         <FormField
+        //             control={form.control}
+        //             name="languageId"
+        //             render={({ field }) => (
+        //                 <FormItem>
+        //                     <FormLabel>Language</FormLabel>
+        //                     <FormControl>
+        //                         <Select {...field}>
+        //                             <SelectTrigger>
+        //                                 <SelectValue placeholder="Select a language" />
+        //                             </SelectTrigger>
+        //                             <SelectContent>
+        //                                 <SelectGroup>
+        //                                     <SelectLabel>
+        //                                         Coding Language
+        //                                     </SelectLabel>
+        //                                     {Object.entries(languageMap).map(
+        //                                         ([key, value]) => (
+        //                                             <SelectItem
+        //                                                 key={key}
+        //                                                 value={value.toString()}
+        //                                             >
+        //                                                 {key}
+        //                                             </SelectItem>
+        //                                         )
+        //                                     )}
+        //                                 </SelectGroup>
+        //                             </SelectContent>
+        //                         </Select>
+        //                     </FormControl>
+        //                     <FormDescription>
+        //                         The language that your code is executed as
+        //                     </FormDescription>
+        //                     <FormMessage />
+        //                 </FormItem>
+        //             )}
+        //         />
+        //         <SubmitButton
+        //             variant={"default"}
+        //             isPending={isPending}
+        //             className="self-center mt-4"
+        //             label="Create"
+        //         />
+        //     </form>
+        // </Form>
+        <SubmitButton
+            onClick={onSubmit}
+            isPending={isPending}
+            variant={"default"}
+        >
+            <PlusCircle className="h-4 w-4 mr-2" /> Create a gist
+        </SubmitButton>
     )
 }

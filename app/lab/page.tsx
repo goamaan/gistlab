@@ -1,8 +1,8 @@
-import { PlusCircle } from "lucide-react";
-import Image from "next/image";
+import { PlusCircle } from "lucide-react"
+import Image from "next/image"
 
-import { CreateGistForm } from "@/app/lab/createGist";
-import { Button } from "@/components/ui/button";
+import { CreateGistForm } from "@/app/lab/createGist"
+import { Button } from "@/components/ui/button"
 import {
     Dialog,
     DialogContent,
@@ -10,7 +10,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/components/ui/dialog"
 
 export default function DocumentsPage() {
     return (
@@ -30,12 +30,8 @@ export default function DocumentsPage() {
                 className="hidden dark:block"
             />
             <h2 className="text-lg font-medium">Welcome to your Lab</h2>
-            <Dialog>
+            {/* <Dialog>
                 <DialogTrigger asChild>
-                    <Button>
-                        <PlusCircle className="h-4 w-4 mr-2" />
-                        Create a gist
-                    </Button>
                 </DialogTrigger>
                 <DialogContent>
                     <DialogHeader>
@@ -44,9 +40,9 @@ export default function DocumentsPage() {
                             Create a gist or import one from Github
                         </DialogDescription>
                     </DialogHeader>
-                    <CreateGistForm />
                 </DialogContent>
-            </Dialog>
+            </Dialog> */}
+            <CreateGistForm />
         </div>
-    );
+    )
 }

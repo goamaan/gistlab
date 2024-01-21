@@ -4,13 +4,9 @@ import { db } from "@/lib/db"
 import { revalidatePath } from "next/cache"
 
 export const createGist = async ({
-    languageId,
-    filename,
     description,
     userId,
 }: {
-    languageId: string
-    filename: string
     description: string
     userId: string | null
 }) => {
@@ -28,63 +24,72 @@ export const createGist = async ({
 
     const gist = await db.gist.create({
         data: {
-            content: "",
-            languageId: parseInt(languageId),
             description,
-            filename,
             userId: user.id,
+            files: {
+                create: {
+                    content: "",
+                    filename: "Untitled.ts",
+                    languageId: 94,
+                },
+            },
         },
     })
 
-    revalidatePath("/lab")
+    revalidatePath("/lab", "layout")
 
     return gist
 }
 
-export const updateGistContent = async ({
-    content,
-    gistId,
-    userId,
-}: {
-    content: string
+export const createFileForGist = async (
+    languageId: string,
+    filename: string,
     gistId: string
-    userId: string | null
-}) => {
-    if (!userId) {
-        throw new Error("User Id not provided when creating Gist")
-    }
-
-    const user = await db.user.findUnique({
-        where: { externalUserId: userId },
+) => {
+    const file = await db.file.create({
+        data: {
+            languageId: parseInt(languageId),
+            filename,
+            content: "",
+            gistId,
+        },
     })
 
-    if (!user) {
-        throw new Error("User with given ID not found")
-    }
+    revalidatePath("/lab", "layout")
+    revalidatePath(`/lab/${gistId}`, "page")
 
-    const gist = await db.gist.update({
+    return file
+}
+
+export const updateFileContent = async ({
+    content,
+    fileId,
+}: {
+    content: string
+    fileId: string
+}) => {
+    const file = await db.file.update({
         where: {
-            id: gistId,
+            id: fileId,
         },
         data: {
             content,
-            userId: user.id,
         },
     })
 
-    revalidatePath(`/lab/${gist.id}`)
+    revalidatePath(`/lab/${file.id}`)
 
-    return gist
+    return file
 }
 
-export const runGist = async ({
+export const runFile = async ({
     language_id,
     source_code,
-    gistId,
+    fileId,
 }: {
     language_id: number
     source_code: string
-    gistId: string
+    fileId: string
 }) => {
     const host = process.env.JUDGE0_HOST
     const key = process.env.JUDGE0_KEY
@@ -120,6 +125,6 @@ export const runGist = async ({
     const { token } = await res.json()
 
     await db.codeSubmission.create({
-        data: { source_code, language_id, gistId, token },
+        data: { source_code, language_id, fileId, token },
     })
 }

@@ -56,7 +56,12 @@ export default function RootLayout({
                         storageKey="gistlab-theme"
                     >
                         {children}
-                        <Toaster closeButton={true} richColors={true} />
+                        <Toaster
+                            position="bottom-center"
+                            duration={1500}
+                            closeButton={true}
+                            richColors={true}
+                        />
                         <ModalProvider />
                     </ThemeProvider>
                 </body>

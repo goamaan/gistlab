@@ -1,4 +1,4 @@
-import { GistEditor } from "@/app/lab/[gistId]/_components/editor"
+import { GistEditor } from "@/app/lab/[gistId]/_components/gist-editor"
 import { Spinner } from "@/components/spinner"
 import { languageIdExtensionMap } from "@/lib/coding_languages"
 import { db } from "@/lib/db"
@@ -14,6 +14,9 @@ const GistIdPage = async ({ params }: GistIdPageProps) => {
     const gist = await db.gist.findUnique({
         where: {
             id: params.gistId,
+        },
+        include: {
+            files: true,
         },
     })
 
