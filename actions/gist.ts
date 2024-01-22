@@ -3,13 +3,7 @@
 import { db } from "@/lib/db"
 import { revalidatePath } from "next/cache"
 
-export const createGist = async ({
-    description,
-    userId,
-}: {
-    description: string
-    userId: string | null
-}) => {
+export const createGist = async ({ userId }: { userId: string | null }) => {
     if (!userId) {
         throw new Error("User Id not provided when creating Gist")
     }
@@ -24,7 +18,7 @@ export const createGist = async ({
 
     const gist = await db.gist.create({
         data: {
-            description,
+            description: "Untitled Gist",
             userId: user.id,
             files: {
                 create: {
@@ -34,6 +28,7 @@ export const createGist = async ({
                 },
             },
         },
+        include: { files: true },
     })
 
     revalidatePath("/lab", "layout")
@@ -41,14 +36,18 @@ export const createGist = async ({
     return gist
 }
 
-export const createFileForGist = async (
-    languageId: string,
-    filename: string,
+export const createFileForGist = async ({
+    languageId,
+    filename,
+    gistId,
+}: {
+    languageId: number
+    filename: string
     gistId: string
-) => {
+}) => {
     const file = await db.file.create({
         data: {
-            languageId: parseInt(languageId),
+            languageId: languageId,
             filename,
             content: "",
             gistId,

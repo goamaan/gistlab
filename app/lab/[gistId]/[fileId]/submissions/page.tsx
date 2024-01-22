@@ -7,20 +7,17 @@ import {
     Card,
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { auth } from "@clerk/nextjs"
 import { db } from "@/lib/db"
 
 export default async function GistSubmissions({
     params,
     searchParams,
 }: {
-    params: { gistId: string }
+    params: { gistId: string; fileId: string }
     searchParams: { [key: string]: string | string[] | undefined }
 }) {
-    const { userId } = auth()
-
     const submissions = await db.codeSubmission.findMany({
-        where: { gistId: params.gistId },
+        where: { fileId: params.fileId },
         orderBy: { createdAt: "desc" },
     })
 

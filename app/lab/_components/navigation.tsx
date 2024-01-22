@@ -4,30 +4,28 @@ import {
     ChevronsLeft,
     Home,
     MenuIcon,
-    Plus,
-    PlusCircle,
-    Search,
+    PlusCircleIcon,
     Settings,
-    Trash,
 } from "lucide-react"
 import { useParams, usePathname, useRouter } from "next/navigation"
 import { ElementRef, useEffect, useRef, useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
-import { toast } from "sonner"
-
 import { cn } from "@/lib/utils"
-import {
-    Popover,
-    PopoverTrigger,
-    PopoverContent,
-} from "@/components/ui/popover"
 import { UserItem } from "@/app/lab/_components/user-item"
 import { useSettings } from "@/hooks/use-settings"
 import { Item } from "@/app/lab/_components/item"
 import { GistList } from "@/app/lab/_components/gist-list"
-import { Gist } from "@prisma/client"
+import { File, Gist } from "@prisma/client"
+import { createGist } from "@/actions/gist"
+import { toast } from "sonner"
 
-export const Navigation = ({ gists }: { gists: Gist[] }) => {
+export const Navigation = ({
+    userId,
+    gists,
+}: {
+    userId: string
+    gists: (Gist & { files: File[] })[]
+}) => {
     const router = useRouter()
     const settings = useSettings()
 
@@ -119,17 +117,17 @@ export const Navigation = ({ gists }: { gists: Gist[] }) => {
         }
     }
 
-    //   const handleCreate = () => {
-    //     const promise = create({ title: "Untitled" }).then((documentId) =>
-    //       router.push(`/documents/${documentId}`)
-    //     )
+    const handleCreate = () => {
+        const promise = createGist({
+            userId,
+        }).then((gist) => router.push(`/lab/${gist.id}/${gist.files[0].id}`))
 
-    //     toast.promise(promise, {
-    //       loading: "Creating a new note...",
-    //       success: "New note created!",
-    //       error: "Failed to create a new note.",
-    //     })
-    //   }
+        toast.promise(promise, {
+            loading: "Creating a new gist...",
+            success: "New gist created!",
+            error: "Failed to create a new gist.",
+        })
+    }
 
     return (
         <>
@@ -153,8 +151,6 @@ export const Navigation = ({ gists }: { gists: Gist[] }) => {
                 </div>
                 <div>
                     <UserItem />
-                    {/* <Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
-          <Item onClick={handleCreate} label="New page" icon={PlusCircle} /> */}
                     <Item
                         label="Home"
                         icon={Home}
@@ -166,9 +162,15 @@ export const Navigation = ({ gists }: { gists: Gist[] }) => {
                         onClick={settings.onOpen}
                     />
                 </div>
-                <div className="mt-4">
+                <div className="mt-8">
+                    <Item
+                        label="Create new Gist"
+                        icon={PlusCircleIcon}
+                        onClick={handleCreate}
+                    />
+                </div>
+                <div className="mt-2">
                     <GistList gists={gists} />
-                    {/* <Item onClick={handleCreate} icon={Plus} label="Add a page" /> */}
                 </div>
                 <div
                     onMouseDown={handleMouseDown}

@@ -114,9 +114,7 @@ export const GistEditor = ({ gist }: { gist: Gist & { files: File[] } }) => {
         <div className="flex flex-col h-full w-full">
             <nav className="pl-14 bg-primary/10 dark:bg-secondary/40 px-3 py-2 w-full flex items-center gap-x-4">
                 <div className="flex items-center justify-between w-full">
-                    <h1>{`${file.filename}.${
-                        languageIdExtensionMap[file.languageId]
-                    }`}</h1>
+                    <h1>{gist.description}</h1>
                     <div className="flex items-center gap-x-2">
                         <Link href={`/lab/${file.id}/submissions`}>
                             <Button variant={"secondary"}>

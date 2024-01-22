@@ -1,4 +1,4 @@
-import { GistEditor } from "@/app/lab/[gistId]/_components/gist-editor"
+import { GistEditor } from "@/app/lab/[gistId]/[fileId]/_components/gist-editor"
 import { Spinner } from "@/components/spinner"
 import { languageIdExtensionMap } from "@/lib/coding_languages"
 import { db } from "@/lib/db"
@@ -7,6 +7,7 @@ import { Suspense } from "react"
 interface GistIdPageProps {
     params: {
         gistId: string
+        fileId: string
     }
 }
 

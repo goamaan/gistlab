@@ -49,19 +49,13 @@ export function CreateGistForm() {
     const [isPending, startTransition] = useTransition()
     const { userId } = useAuth()
 
-    // const form = useForm<z.infer<typeof formSchema>>({
-    //     resolver: zodResolver(formSchema),
-    //     defaultValues: {
-    //         // languageId: "94",
-    //     },
-    // })
-
     function onSubmit() {
         startTransition(() => {
             const promise = createGist({
-                description: "Gist Description",
                 userId: userId || null,
-            }).then((gist) => router.push(`/lab/${gist.id}`))
+            }).then((gist) =>
+                router.push(`/lab/${gist.id}/${gist.files[0].id}`)
+            )
 
             toast.promise(promise, {
                 loading: "Creating a new gist...",

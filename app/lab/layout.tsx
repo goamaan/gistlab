@@ -1,5 +1,3 @@
-import { redirect } from "next/navigation"
-
 import { Navigation } from "./_components/navigation"
 import { db } from "@/lib/db"
 import { auth } from "@clerk/nextjs"
@@ -25,7 +23,7 @@ const MainLayout = async ({ children }: { children: React.ReactNode }) => {
 
     return (
         <div className="h-full flex items-end">
-            <Navigation gists={gists} />
+            <Navigation gists={gists} userId={userId} />
             <main className="flex-1 h-full overflow-y-auto">{children}</main>
         </div>
     )

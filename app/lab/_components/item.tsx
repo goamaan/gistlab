@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
     ChevronDown,
@@ -7,29 +7,28 @@ import {
     MoreHorizontal,
     Plus,
     Trash,
-} from "lucide-react";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-import { useUser } from "@clerk/clerk-react";
+} from "lucide-react"
+import { useRouter } from "next/navigation"
+import { toast } from "sonner"
+import { useUser } from "@clerk/clerk-react"
 
-import { cn } from "@/lib/utils";
-import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils"
+import { Skeleton } from "@/components/ui/skeleton"
 import {
     DropdownMenu,
     DropdownMenuTrigger,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu"
 
 interface GistProps {
-    id?: string;
-    active?: boolean;
-    isSearch?: boolean;
-    label: string;
-    onClick?: () => void;
-    icon: LucideIcon;
-    updatedAt?: Date;
+    id?: string
+    active?: boolean
+    label: string
+    onClick?: () => void
+    icon: LucideIcon
+    updatedAt?: Date
 }
 
 export const Item = ({
@@ -38,11 +37,10 @@ export const Item = ({
     onClick,
     icon: Icon,
     active,
-    isSearch,
     updatedAt,
 }: GistProps) => {
-    const { user } = useUser();
-    const router = useRouter();
+    const { user } = useUser()
+    const router = useRouter()
 
     return (
         <div
@@ -85,8 +83,8 @@ export const Item = ({
                 </div>
             )}
         </div>
-    );
-};
+    )
+}
 
 Item.Skeleton = function ItemSkeleton({ level }: { level?: number }) {
     return (
@@ -99,5 +97,5 @@ Item.Skeleton = function ItemSkeleton({ level }: { level?: number }) {
             <Skeleton className="h-4 w-4" />
             <Skeleton className="h-4 w-[30%]" />
         </div>
-    );
-};
+    )
+}
